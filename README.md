@@ -3,6 +3,7 @@
 ### 👋 Hey, I'm Ethan
 
 I like conducting empirical econometrics and finance research, as well as competing in pitch competitions.
+<br>
 
 </div>
 
