@@ -1,10 +1,9 @@
 <div align="center">
-  
+
 ### 👋 Hey, I'm Ethan
 
-I do empirical econometrics and finance research, as well as pitch competitions
+$$\left| \mathcal{L} \right| = 2 \implies \left( \Delta l_2(t) > 0 \iff \mathcal{P}_t\left(\left|\mathcal{L}\right|\right) = 1 \right)$$
 
-$$\phi_t(x) = (1 - \epsilon_t) Q(x) + \epsilon_t U(x)$$
-$$\epsilon_t = \text{Intuition}(t, \beta)$$
+*- Κονφούκιος*
 
 </div>
