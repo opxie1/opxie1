@@ -10,6 +10,7 @@ I like conducting empirical econometrics and finance research, as well as compet
 **UC Merced**: Pipeline for ICE detention and encounters for facility-to-county aggregate crosswalks using Python <br>
 **Delaware State University**: Modeling credit and equity market reactions to the April 2025 Trump Liberation Day announcement using Bloomberg Terminal & FRED
 <br>
+<br>
 
 <div align="center">
 
