@@ -10,6 +10,6 @@ $$\left| \mathcal{L} \right| = 2 \implies \left( \Delta l_2(t) > 0 \iff \mathcal
 
 </div>
 
-**UChicago**: Currently replicating *Explaining the Decline in the US Employment-to-Population Ratio: A Review of the Evidence* (Abraham & Kearney, 2020) using tidyverse R and Apache Parquet <br>
+**UChicago**: Currently replicating *Explaining the Decline in the US Employment-to-Population Ratio: A Review of the Evidence* (Abraham & Kearney, 2020) using tidyverse R & Apache Parquet <br>
 **UC Merced**: Currently building pipeline for ICE detention and encounters for facility-to-county aggregate crosswalks using Python <br>
 **Delaware State University**: Currently modeling credit and equity market reactions to the April 2025 Trump Liberation Day announcement using Bloomberg Terminal & FRED
