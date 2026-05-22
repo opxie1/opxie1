@@ -2,7 +2,7 @@
 
 I like conducting empirical econometrics and finance research, as well as competing in pitch competitions.
 
----
+
 
 ### Research & Projects
 
@@ -12,7 +12,7 @@ I like conducting empirical econometrics and finance research, as well as compet
 
 *   **Delaware State University: Modeling credit and equity market reactions to the April 2025 Trump Liberation Day announcement** 
 
----
+
 
 $$|L| = 2 \implies (\Delta l_2(t) > 0 \iff P_t(|L|) = 1)$$
 
