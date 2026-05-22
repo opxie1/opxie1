@@ -10,9 +10,10 @@ I like conducting empirical econometrics and finance research, as well as compet
 
 *   **[UC Merced: Pipeline for ICE detention and encounters for facility-to-county aggregate crosswalks](https://github.com/opxie1/icedetention)** 
 
-*   **Delaware State University: Modeling credit and equity market reactions to the April 2025 Trump Liberation Day announcement** 
+*   **Delaware State University:** [Modeling credit and equity market reactions to the April 2025 Trump Liberation Day announcement](your-excel-file.xlsx)
 
 
+<br>
 
 $$|L| = 2 \implies (\Delta l_2(t) > 0 \iff P_t(|L|) = 1)$$
 
