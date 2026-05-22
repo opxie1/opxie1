@@ -8,4 +8,7 @@ $$\left| \mathcal{L} \right| = 2 \implies \left( \Delta l_2(t) > 0 \iff \mathcal
 
 *-- Confucius, supposedly*
 
+**UChicago** Currently replicating *Explaining the Decline in the US Employment-to-Population Ratio: A Review of the Evidence* (Abraham & Kearney, 2020) using tidyverse R and Apache Parquet
+**UC Merced** Currently building pipeline for ICE detention and encounters for facility-to-county aggregate crosswalks using Python
+**Delaware State University** Currently modeling credit and equity market reactions to the April 2025 Trump Liberation Day announcement using Bloomberg Terminal & FRED
 </div>
