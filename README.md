@@ -8,7 +8,7 @@ I like conducting empirical econometrics and finance research, as well as compet
 
 ### Research & Projects
 
-*   **UChicago:** [Replication of *Explaining the Decline in the US Employment-to-Population Ratio: A Review of the Evidence* (Abraham & Kearney, 2020)](https://github.com/opxie1/abraham-kearney-2020-replication) 
+*   **UChicago:** [Replicating *Explaining the Decline in the US Employment-to-Population Ratio: A Review of the Evidence* (Abraham & Kearney, 2020)](https://github.com/opxie1/abraham-kearney-2020-replication) 
 
 *   **UC Merced:** [Pipeline for ICE detention and encounters for facility-to-county aggregate crosswalks](https://github.com/opxie1/icedetention)
 
