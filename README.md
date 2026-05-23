@@ -1,6 +1,6 @@
 <div align="center">
   
-### 👋 Hey, I'm Ethan
+### 👋 你好，我叫谢依森。
 
 I like conducting empirical econometrics and finance research, as well as competing in pitch competitions.
 
