@@ -10,7 +10,7 @@ I like conducting empirical econometrics and finance research, as well as compet
 
 *   **[UC Merced: Pipeline for ICE detention and encounters for facility-to-county aggregate crosswalks](https://github.com/opxie1/icedetention)** 
 
-*   **Delaware State University:** [Modeling credit and equity market reactions to the April 2025 Trump Liberation Day announcement](dsu-research.xlsx)
+*   **Delaware State University: [Modeling credit and equity market reactions to the April 2025 Trump Liberation Day announcement](https://docs.google.com/spreadsheets/d/1X-JbS7r9XyflgLVskf3_-pdXnY9qZfwM/edit?gid=477933987#gid=477933987)**
 
 
 <br>
