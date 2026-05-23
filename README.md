@@ -5,7 +5,6 @@
 I like conducting empirical econometrics and finance research, as well as competing in pitch competitions.
 
 </div>
-<br>
 
 ### Research & Projects
 
