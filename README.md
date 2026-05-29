@@ -2,6 +2,8 @@
   
 ### 👋 你好，我叫谢依森。
 
+![hola](./bubble.svg)
+
 I like conducting empirical econometrics and finance research, as well as competing in pitch competitions.
 
 </div>
