@@ -1,0 +1,8 @@
+<svg width="300" height="100" xmlns="http://www.w3.org/2000/svg">
+  <rect x="40" y="10" width="245" height="65" rx="32" ry="32" fill="#1B6FF8"/>
+  <polygon points="60,72 40,90 80,72" fill="#1B6FF8"/>
+  <text x="163" y="50" font-family="Arial, sans-serif" font-size="22"
+    font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">
+    hola, i&#39;m coco
+  </text>
+</svg>
