@@ -12,7 +12,7 @@ I like conducting CS and empirical economics research, as well as competing in p
 
 *   **UChicago:** [Replicating *Explaining the Decline in the US Employment-to-Population Ratio: A Review of the Evidence* (Abraham & Kearney)](https://github.com/opxie1/abraham-kearney-2020-replication)
 
-*   **University of South Dakota** [Negative Effects of Quantitative Easing](https://github.com/opxie1/usd)
+*   **University of South Dakota:** [Negative Effects of Quantitative Easing](https://github.com/opxie1/usd)
 
 *   **UC Merced:** [Pipeline for ICE detention and encounters for facility-to-county aggregate crosswalks](https://github.com/opxie1/icedetention)
 
