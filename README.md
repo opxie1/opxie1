@@ -4,7 +4,7 @@
 
 ![hola](./bubble.svg)
 
-I like conducting CS and empirical economics research, as well as competing in pitch competitions.
+I like making stuff.
 
 </div>
 
