@@ -2,8 +2,6 @@
   
 ### 👋 你好，我叫谢依森。
 
-![hola](./bubble.svg)
-
 I like making stuff.
 
 </div>
