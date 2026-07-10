@@ -9,7 +9,7 @@ I like making stuff.
 #### Present
 *   **UChicago:** [Replicating *Income and Democracy* (Acemoglu, Johnson, Robinson & Yared)](https://github.com/opxie1/income-and-democracy-replication)
 *   **University of South Dakota:** [Negative Effects of Quantitative Easing](https://github.com/opxie1/usd)
-*   **Molda:** [Jarvis but for CAD](https://github.com/opxie1/molda)
+<div align="center"><small>and a few other things that i can't disclose right now</small></div>
 
 #### Past
 *   **UChicago:** [Replicating *Explaining the Decline in the US Employment-to-Population Ratio: A Review of the Evidence* (Abraham & Kearney)](https://github.com/opxie1/abraham-kearney-2020-replication)
