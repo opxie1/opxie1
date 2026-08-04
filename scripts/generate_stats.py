@@ -67,6 +67,10 @@ def clip(name, chars=17):
     return name if len(name) <= chars else name[:chars - 1] + "."
 
 
+def days(n):
+    return "%d day%s" % (n, "" if n == 1 else "s")
+
+
 # --------------------------------------------------------------------------- stats
 
 def stats_svg(d, theme, w=420, h=214):
@@ -112,14 +116,14 @@ def stats_svg(d, theme, w=420, h=214):
 def streak_svg(d, theme, w=420, h=214):
     c = THEMES[theme]
     s = ghdata.streaks(d["days"], d["today"])
-    o = [open_svg(w, h, "current streak %d days, longest %d days" % (s["current"], s["longest"])),
+    o = [open_svg(w, h, "current streak %s, longest %s" % (days(s["current"]), days(s["longest"]))),
          frame(w, h, c)]
 
-    def block(y, title, days, span, accent):
+    def block(y, title, n, span, accent):
         o.append(txt(18, y, title, 10, c["dim"]))
-        o.append(txt(18, y + 32, str(days), 30, accent, 700))
-        unit = "day" if days == 1 else "days"
-        o.append(txt(18 + len(str(days)) * 18.0 + 7, y + 32, unit, 11, c["dim"]))   # 30px * 0.600 advance
+        o.append(txt(18, y + 32, str(n), 30, accent, 700))
+        unit = "day" if n == 1 else "days"
+        o.append(txt(18 + len(str(n)) * 18.0 + 7, y + 32, unit, 11, c["dim"]))      # 30px * 0.600 advance
         if span:
             rng = pretty(span[0]) if span[0] == span[1] else "%s - %s" % (pretty(span[0]), pretty(span[1]))
         else:
@@ -139,9 +143,12 @@ def streak_svg(d, theme, w=420, h=214):
 
 # --------------------------------------------------------------------------- langs
 
-def langs_svg(d, theme, w=860, h=196):
+def langs_svg(d, theme, w=860):
     c = THEMES[theme]
     L = ghdata.languages(d["repos"])
+    # Height follows the row count. Fixed at six rows, an account with four
+    # languages gets a card that is a third empty.
+    h = 50 + 22 * max(1, len(L["bytes"]), len(L["repos"])) + 8
     # One colour, fading by rank. Cycling through accent/accent2/accent3 was
     # not monotonic -- on the light palette rank 3 came out darker than rank 1.
     fade = [1.0, 0.80, 0.62, 0.46, 0.33, 0.23]
