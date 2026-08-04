@@ -2,7 +2,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="portrait-dark.svg">
-  <img alt="ASCII portrait" src="portrait-light.svg" width="460">
+  <img alt="ASCII portrait" src="portrait-light.svg" width="300">
 </picture>
 
 </div>

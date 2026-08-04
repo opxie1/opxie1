@@ -22,22 +22,78 @@ DISPLAY_W = 460        # what the README asks for; the SVG is drawn larger and s
 ASPECT = 0.48          # monospace cells are ~2x tall as wide
 GAMMA = 1.7            # the darkening curve -- without it the face washes out
 CLAHE_CLIP = 3.0
-STAGGER = 0.09         # seconds between the start of one row and the next
+MODEL = "u2net_human_seg"
 DUR = 0.55             # seconds for one row to finish wiping in
+TOTAL = 5.2            # seconds for the whole portrait to print; sets the stagger,
+                       # so a 77-row figure does not sit there typing for 7 seconds
 
 
-def to_ascii(src, cols=COLS):
-    """rembg cut-out -> bilateral -> CLAHE -> darkening curve -> ramp."""
-    from rembg import remove
+def subject_box(alpha, pad=0.03):
+    """Bounding box of the cut-out subject, with a little air around it."""
+    ys, xs = np.nonzero(np.array(alpha) > 8)
+    if not len(xs):
+        return None
+    x0, x1, y0, y1 = xs.min(), xs.max(), ys.min(), ys.max()
+    mx, my = int((x1 - x0) * pad), int((y1 - y0) * pad)
+    w, h = alpha.size
+    return (max(0, x0 - mx), max(0, y0 - my), min(w, x1 + mx), min(h, y1 + my))
+
+
+def head_box(alpha, box, shoulder=0.52, jaw=0.18):
+    """Head crop, found from the cut-out mask rather than a face detector.
+
+    OpenCV 5 dropped the Haar cascades, and this needs no model anyway: on a
+    standing figure the mask is narrow across the head and widens sharply at
+    the shoulders, so the first row past that threshold is the neckline.
+    """
+    m = np.array(alpha)[box[1]:box[3], box[0]:box[2]] > 8
+    widths = m.sum(axis=1)
+    if not widths.max():
+        return None
+    wide = np.nonzero(widths >= shoulder * widths.max())[0]
+    neck = int(wide[0]) if len(wide) else 0
+    if neck < 0.06 * len(widths):                     # no clear shoulder line
+        neck = int(0.22 * len(widths))
+    bottom = min(len(widths), int(neck * (1 + jaw)))
+
+    # Measure the width across the head only. Taking it over the whole band
+    # picks up the shoulders that have already started flaring at the neckline
+    # and returns a box wider than it is tall.
+    xs = np.nonzero(m[:int(bottom * 0.65)].any(axis=0))[0]
+    if not len(xs):
+        return None
+    pad_x = int((xs[-1] - xs[0]) * 0.10)
+    pad_y = int(bottom * 0.10)
+    return (max(0, box[0] + int(xs[0]) - pad_x),
+            max(0, box[1] - pad_y),
+            min(alpha.size[0], box[0] + int(xs[-1]) + pad_x),
+            min(alpha.size[1], box[1] + bottom))
+
+
+def to_ascii(src, cols=COLS, crop="none", model=MODEL):
+    """rembg cut-out -> crop -> bilateral -> CLAHE -> darkening curve -> ramp."""
+    from rembg import new_session, remove
 
     img = Image.open(src).convert("RGBA")
-    cut = remove(img)
+    # The general salient-object model keeps whatever the subject is touching,
+    # so a person leaning on a car comes back as person-and-car. The human
+    # segmentation model cuts the person out on their own.
+    cut = remove(img, session=new_session(model))
 
     # Composite onto white. Everything outside the subject becomes 255, which
     # maps to the blank end of the ramp. Skip this and the background fills
     # with '@' and drowns the portrait.
     flat = Image.new("RGB", cut.size, (255, 255, 255))
     flat.paste(cut, mask=cut.split()[3])
+
+    if crop != "none":
+        alpha = cut.split()[3]
+        box = subject_box(alpha)
+        if crop == "head" and box:
+            box = head_box(alpha, box) or box
+        if box:
+            flat = flat.crop(box)
+            print("cropped to %dx%d" % (flat.width, flat.height))
 
     g = np.array(flat.convert("L"))
     g = cv2.bilateralFilter(g, 9, 75, 75)                       # smooth skin, keep edges
@@ -55,17 +111,18 @@ def to_ascii(src, cols=COLS):
     return ["".join(RAMP[i] for i in row) for row in idx]
 
 
-def build_svg(lines, theme, cols=COLS):
+def build_svg(lines, theme, cols=COLS, display_w=DISPLAY_W):
     c = THEMES[theme]
     w = cols * CHAR_W
     h = len(lines) * LINE_H + LINE_H * 0.4
-    scale = DISPLAY_W / w
-    total = (len(lines) - 1) * STAGGER + DUR
+    scale = display_w / w
+    stagger = max(0.02, (TOTAL - DUR) / max(1, len(lines) - 1))
+    total = (len(lines) - 1) * stagger + DUR
 
     out = [
         '<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" '
         'viewBox="0 0 %.2f %.2f" role="img" aria-label="ASCII portrait">'
-        % (round(DISPLAY_W), round(h * scale), w, h),
+        % (round(display_w), round(h * scale), w, h),
         "<defs><style>%s"
         "text{font-family:'JBM',ui-monospace,'DejaVu Sans Mono',monospace;"
         "font-size:%.2fpx;white-space:pre;fill:%s}</style>" % (font_face("ramp.woff2"), FONT_SIZE, c["ink"]),
@@ -80,7 +137,7 @@ def build_svg(lines, theme, cols=COLS):
         text = stripped[lead:]
         x = lead * CHAR_W
         y = (i + 1) * LINE_H
-        begin = i * STAGGER
+        begin = i * stagger
         cw = len(text) * CHAR_W
 
         # Each row is revealed by a rect whose width animates 0 -> full. Every
@@ -117,14 +174,18 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("photo", help="source photo; 1200px+, tight crop, side light")
     ap.add_argument("--cols", type=int, default=COLS)
+    ap.add_argument("--crop", choices=("none", "subject", "head"), default="none",
+                    help="none keeps the frame; subject fits the cut-out; head goes chin-to-hair")
+    ap.add_argument("--model", default=MODEL, help="rembg model; u2net for non-human subjects")
+    ap.add_argument("--width", type=int, default=DISPLAY_W, help="display width in px")
     args = ap.parse_args()
 
-    lines = to_ascii(args.photo, args.cols)
+    lines = to_ascii(args.photo, args.cols, args.crop, args.model)
     ink = sum(1 for r in lines if r.strip())
     print("%d cols x %d rows (%d non-blank)" % (args.cols, len(lines), ink))
 
     for theme in THEMES:
-        svg, total = build_svg(lines, theme, args.cols)
+        svg, total = build_svg(lines, theme, args.cols, args.width)
         write(ROOT / ("portrait-%s.svg" % theme), svg)
     print("types for %.1fs, then freezes" % total)
 
