@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+
+# The source photo stays local. The repo is public and the ASCII portrait is
+# the thing meant to be published, not the original headshot. Drop the file in
+# and run scripts/ascii_portrait.py; commit it only if you want it public.
+assets/photo.*
