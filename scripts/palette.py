@@ -17,6 +17,15 @@ CHAR_W = 7.74          # 12.9 * 0.600
 LINE_H = 15.48         # 2 * CHAR_W -- monospace cells are ~2x tall as wide
 
 # Light-to-dark. The leading space is what clears the background to nothing.
+#
+# Tried and rejected: extending past '@' with the shade blocks U+2591-2593 and
+# U+2588. '@' only inks about a third of its cell, so the blocks do lift peak
+# contrast against the page by roughly nine times, and JetBrains Mono draws
+# them at 600/1000 like everything else so the grid survives. But three of the
+# four are dither patterns rather than solid fills, and at six pixels to a cell
+# they moire against the pixel grid and pick up colour fringing from subpixel
+# antialiasing -- the render came out looking like a decoding fault. Contrast
+# is worth having, but not at the price of the page looking broken.
 RAMP = " .`:-=+*cs#%@"
 
 # Two palettes, selected by <picture> in the README rather than by a

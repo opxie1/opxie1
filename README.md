@@ -2,7 +2,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="portrait-dark.svg">
-  <img alt="ASCII portrait" src="portrait-light.svg" width="300">
+  <img alt="ASCII portrait: standing beside a Porsche 911 at night" src="portrait-light.svg" width="860">
 </picture>
 
 </div>
